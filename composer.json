@@ -1,0 +1,30 @@
+{
+    "name": "larsbadke/stock-simulator",
+    "type": "library",
+    "description": "Stock-Simulator is a PHP library that simulates fake stock data for you.",
+    "keywords": ["stock", "simulator", "data"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lars Badke"
+        }
+    ],
+    "require": {
+        "php": "^5.3.3|^7.0",
+        "nesbot/carbon": "^1.21"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Simulator\\": "src/Simulator/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Simulator\\Test\\": "test/Simulator/"
+        }
+    }
+}
