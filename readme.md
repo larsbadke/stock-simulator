@@ -26,7 +26,7 @@ Single movement
 ```php
 <?php
 
-$simulator = new Simulator;
+$simulator = new Simulator\Simulator;
 
 $simulator->drift(0.01);
 
@@ -43,7 +43,7 @@ Generates a complete random stock movement like an impulse or a trend
 ```php
 <?php
 
-$simulator = new Simulator;
+$simulator = new Simulator\Simulator;
 
 $simulator->startPrice(50);
 
