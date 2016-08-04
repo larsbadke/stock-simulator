@@ -19,14 +19,14 @@ class Simulator
      *
      * @var int
      */
-    protected $mu = 0;
+    public $drift = 0;
 
     /**
      * Deviation of stock simulation
      *
      * @var float
      */
-    protected $deviation = 0.01;
+    public $volatility = 0.01;
 
     /**
      * Create Gaps
@@ -69,10 +69,10 @@ class Simulator
     {
         if ($price) {
 
-            return $this->simulate(8, $this->mu, $this->deviation, $this->price)->close();
+            return $this->simulate(8, $this->drift, $this->volatility, $this->price)->close();
         }
 
-        return $this->simulate(8, $this->mu, $this->deviation, $this->price)->close();
+        return $this->simulate(8, $this->drift, $this->volatility, $this->price)->close();
     }
 
 
@@ -139,21 +139,23 @@ class Simulator
     /**
      * Set drift
      *
-     * @param $mu
+     * @param $drift
+     * @return mixed
      */
-    public function drift($mu)
+    public function drift($drift)
     {
-        $this->mu = $mu;
+        return $this->drift = $drift;
     }
 
     /**
      * Set Volatility
      *
-     * @param $deviation
+     * @param $volatility
+     * @return mixed
      */
-    public function volatility($deviation)
+    public function volatility($volatility)
     {
-        $this->deviation = $deviation;
+        return $this->volatility = $volatility;
     }
 
     /**
