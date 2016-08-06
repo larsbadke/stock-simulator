@@ -3,8 +3,6 @@
 namespace Simulator;
 
 
-use Carbon\Carbon;
-
 class Simulator
 {
     /**
@@ -43,20 +41,20 @@ class Simulator
     protected $run = array();
 
     /**
-     * Quotes
-     *
-     * @var Quote
+     * Handler
+     * 
+     * @var Handler
      */
-    protected $quote;
+    protected $handler;
 
 
     public function __construct()
     {
-        $this->quote = new Quote();
+        $this->handler = new Handler();
 
-        $this->price = mt_rand(1, 100);
+        $this->price = Random::price();
 
-        $this->date = Carbon::createFromTimestamp(mt_rand(0, Carbon::now()->timestamp));
+        $this->run();
     }
 
     /**
@@ -69,7 +67,7 @@ class Simulator
     {
         if ($price) {
 
-            return $this->simulate(8, $this->drift, $this->volatility, $this->price)->close();
+            return $this->simulate(8, $this->drift, $this->volatility, $price)->close();
         }
 
         return $this->simulate(8, $this->drift, $this->volatility, $this->price)->close();
@@ -102,12 +100,12 @@ class Simulator
             
             $growth = exp($drift + $volatility * Random::number());
 
-            $price = $price * pow($growth, 1 / $steps);
+            $price = round($price * pow($growth, 1 / $steps), 2);
 
-            $this->addRun(round($price, 2));
+            $this->addRun($price);
         }
 
-        $this->price = round($price, 2);
+        $this->price = $price;
         
         return $this;
     }
@@ -119,7 +117,7 @@ class Simulator
      */
     public function close()
     {
-        $quotes = $this->quote->create($this->run);
+        $quotes = $this->handler->set($this->run);
 
         $this->run = [];
 
@@ -134,6 +132,18 @@ class Simulator
     public function startPrice($price)
     {
         $this->price = $price;
+
+        $this->run();
+    }
+
+    /**
+     * Set start date
+     *
+     * @param $date
+     */
+    public function startDate($date)
+    {
+        $this->handler->date($date);
     }
 
     /**
@@ -193,9 +203,9 @@ class Simulator
      */
     public function __get($property)
     {
-        if (property_exists($this->quote, $property)) {
+        if (method_exists($this->handler, $property)) {
             
-            return $this->quote->$property;
+            return $this->handler->$property();
         }
 
         throw new \InvalidArgumentException(sprintf('Unable to find property "%s""', $property));

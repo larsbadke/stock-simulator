@@ -27,6 +27,16 @@ class Random{
 
         return $z;
     }
+
+    /**
+     * Create random price
+     *
+     * @return float
+     */
+    public static function price()
+    {
+        return mt_rand(1, 100);
+    }
 }
 
 

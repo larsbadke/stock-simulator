@@ -38,6 +38,23 @@ var_dump($simulator->run());
 
 ```
 
+Access to all properties
+```php
+<?php
+
+$simulator = new Simulator\Simulator;
+
+echo $simulator->date;
+
+echo $simulator->open;
+
+echo $simulator->low;
+
+echo $simulator->high;
+
+echo $simulator->close;
+```
+
 Generates a complete random stock movement like an impulse or a trend
 
 ```php
@@ -47,39 +64,39 @@ $simulator = new Simulator\Simulator;
 
 $simulator->startPrice(50);
 
-$simulator->drift(0);
+$simulator->startDate('01-01-2000');
+
+$simulator->drift(0.01);
 
 $simulator->volatility(0.1);
 
-$simulator->run();
-
 for($i=0; $i<20; $i++){
 
-    echo $simulator->close."\n";
+  echo "Date: {$simulator->date} - {$simulator->open} \n";
 
-    $simulator->run();
+  $simulator->run();
 }
 
-// 49.56
-// 50.79
-// 52.61
-// 51.73
-// 54.72
-// 55.99
-// 56.43
-// 54
-// 54.96
-// 54.94
-// 55.06
-// 52.52
-// 51.43
-// 54.43
-// 56.16
-// 58.88
-// 59.75
-// 59.66
-// 62.63
-// 61.55
+// Date: 01-01-2000 - 50 
+// Date: 02-01-2000 - 49.86 
+// Date: 03-01-2000 - 48.07 
+// Date: 04-01-2000 - 51.08 
+// Date: 05-01-2000 - 53.49 
+// Date: 06-01-2000 - 53.91 
+// Date: 07-01-2000 - 54.96 
+// Date: 08-01-2000 - 55.18 
+// Date: 09-01-2000 - 55.66 
+// Date: 10-01-2000 - 55.19 
+// Date: 11-01-2000 - 58.84 
+// Date: 12-01-2000 - 59.39 
+// Date: 13-01-2000 - 60.93 
+// Date: 14-01-2000 - 61.98 
+// Date: 15-01-2000 - 65.17 
+// Date: 16-01-2000 - 71.59 
+// Date: 17-01-2000 - 70.26 
+// Date: 18-01-2000 - 68.07 
+// Date: 19-01-2000 - 75.51 
+// Date: 20-01-2000 - 77.76 
 
 
 ```

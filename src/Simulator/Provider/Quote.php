@@ -1,6 +1,6 @@
 <?php
 
-namespace Simulator;
+namespace Simulator\Provider;
 
 
 class Quote{

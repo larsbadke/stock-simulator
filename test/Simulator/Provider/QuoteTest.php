@@ -1,8 +1,8 @@
 <?php
 
-namespace Simulator\Test;
+namespace Simulator\Test\Provider;
 
-use Simulator\Quote;
+use Simulator\Provider\Quote;
 
 class QuoteTest extends \PHPUnit_Framework_TestCase
 {
